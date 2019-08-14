@@ -55,6 +55,7 @@ public class MainActivity extends FragmentActivity
             @Override
             public void onClick(View v)
             {
+
                LiveData< List <Information> > informationsLiveData= myViewModel.getinformation();
                informationsLiveData.observe(MainActivity.this, new Observer<List<Information>>() {
                    @Override
@@ -64,6 +65,13 @@ public class MainActivity extends FragmentActivity
                        phonenumberEditText.setText(informations.get(informations.size()-1).getPhonenumber());
                    }
                });
+
+               LiveData< List <Information> > information= myViewModel.getinformation();
+               
+               nameEditText.setText(information.getValue().get(information.getValue().size()-1).getName());
+               lastnameEditText.setText(information.getValue().get(information.getValue().size()-1).getLast_name());
+               phonenumberEditText.setText(information.getValue().get(information.getValue().size()-1).getPhonenumber());
+
             }
         });
     }

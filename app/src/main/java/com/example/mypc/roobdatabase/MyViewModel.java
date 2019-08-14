@@ -1,13 +1,12 @@
 package com.example.mypc.roobdatabase;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 public class MyViewModel extends AndroidViewModel
 {
@@ -32,7 +31,7 @@ public class MyViewModel extends AndroidViewModel
     {
         informatioRep.delete(information);
     }
-    public LiveData<List<Information>> getinformation()
+    public  LiveData<List<Information>> getinformation()
     {
         return information;
 

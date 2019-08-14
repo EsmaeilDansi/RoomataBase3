@@ -1,12 +1,12 @@
 package com.example.mypc.roobdatabase;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Update;
 
 public class InformatioRep
@@ -23,19 +23,16 @@ public class InformatioRep
     public void insert(Information information)
     {
         new InsetInfromationAsyncTask(myDao).execute(information);
-
     }
     public void updata(Information information)
     {
         new UpdataeInfromationAsyncTask(myDao).execute(information);
-
     }
     public void delete(Information information)
     {
         new DeleteInfromationAsyncTask(myDao).execute(information);
 
     }
-
     public LiveData<List<Information>>getinformation()
     {
         return liveData;

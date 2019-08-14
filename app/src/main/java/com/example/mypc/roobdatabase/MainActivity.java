@@ -12,13 +12,14 @@ import java.util.List;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.room.Room;
 public class MainActivity extends FragmentActivity
 {
 
-    EditText name,lastname,phonenumber;
-    Button load,save;
+    EditText nameEdittext,lastnameEdittext,phonenumberEdittext;
+    Button loadBtn,saveBtn;
     final Information information=new Information("","","");
     private MyViewModel myViewModel;
 
@@ -33,43 +34,49 @@ public class MainActivity extends FragmentActivity
             //
             //
         });
-        save.setOnClickListener(new View.OnClickListener()
+        saveBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
 
-                information.setName(name.getText().toString());
-                information.setLast_name(lastname.getText().toString());
-                information.setPhonenumber(phonenumber.getText().toString());
+                information.setName(nameEdittext.getText().toString());
+                information.setLast_name(lastnameEdittext.getText().toString());
+                information.setPhonenumber(phonenumberEdittext.getText().toString());
                 myViewModel.insert(information);
-                name.setText("");
-                lastname.setText("");
-                phonenumber.setText("");
+                nameEdittext.setText("");
+                lastnameEdittext.setText("");
+                phonenumberEdittext.setText("");
 
             }
         });
 
 
-        load.setOnClickListener(new View.OnClickListener()
+        loadBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                LiveData< List <Information> > information= myViewModel.getinformation();
-               name.setText(information.getValue().get(information.getValue().size()-1).getName());
-               lastname.setText(information.getValue().get(information.getValue().size()-1).getLast_name());
-               phonenumber.setText(information.getValue().get(information.getValue().size()-1).getPhonenumber());
+               information.observe(MainActivity.this, new Observer<List<Information>>() {
+                   @Override
+                   public void onChanged(List<Information> information) {
+                       nameEdittext.setText(information.get(information.size()-1).getName());
+                       lastnameEdittext.setText(information.get(information.size()-1).getLast_name());
+                       phonenumberEdittext.setText(information.get(information.size()-1).getPhonenumber());
+                   }
+               });
+
             }
         });
     }
     void init ()
     {
-        name=(EditText)findViewById(R.id.et_1);
-        lastname=(EditText)findViewById(R.id.et_2);
-        phonenumber=(EditText)findViewById(R.id.et_3);
-        load=(Button)findViewById(R.id.bt_1);
-        save=(Button)findViewById(R.id.bt_2);
+        nameEdittext=(EditText)findViewById(R.id.et_1);
+        lastnameEdittext=(EditText)findViewById(R.id.et_2);
+        phonenumberEdittext=(EditText)findViewById(R.id.et_3);
+        loadBtn=(Button)findViewById(R.id.bt_1);
+        saveBtn=(Button)findViewById(R.id.bt_2);
 
     }
 

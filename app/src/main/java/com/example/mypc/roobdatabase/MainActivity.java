@@ -66,11 +66,6 @@ public class MainActivity extends FragmentActivity
                    }
                });
 
-               LiveData< List <Information> > information= myViewModel.getinformation();
-               
-               nameEditText.setText(information.getValue().get(information.getValue().size()-1).getName());
-               lastnameEditText.setText(information.getValue().get(information.getValue().size()-1).getLast_name());
-               phonenumberEditText.setText(information.getValue().get(information.getValue().size()-1).getPhonenumber());
 
             }
         });

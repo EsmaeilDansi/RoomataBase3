@@ -43,7 +43,7 @@ public abstract class MyDatabase extends RoomDatabase
         @Override
         protected Void doInBackground(Void... voids)
         {
-            myDao.insert(new Information("ali","abd","223"));
+            myDao.insert(new Information("","",""));
             return null;
         }
     }
